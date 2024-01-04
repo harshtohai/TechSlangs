@@ -16,52 +16,13 @@ next-route-announcer{
 }
 
 body{
-  background-color: #F5F5F5;
+  background-color: #050505;
   width: 100%;
   height: 100vh;
-}
-
-  
-
-.notclicked:hover{
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
-  scale: 102%;
-  @apply transition-all
-}
-
-.clicked:hover{
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
-  scale: 102%;
-  @apply transition-all
-}
-
-p{
-  @apply text-neutral-50;
-  line-height: normal;
-  leading-trim: both;
-  text-edge: cap;
   font-weight: 400;
-} 
-.text{
-  color:#9ca3aa;
-  line-height: normal;
-  leading-trim: both;
-  text-edge: cap;
-  font-weight: 500;
-} 
+  color: white;
+}
 
 ::-webkit-scrollbar {
   width: 0px;
-}
-.clicked{
-  @apply overflow-hidden w-[100%] !text-btn border-grstroke bg-text h-[2.7rem] rounded-[13px] flex mt-[10px]  ;
-}
-
-.clicked p{
-  @apply text-neutral-50
-}
-
-
-.notclicked{
-  @apply overflow-hidden h-[2.7rem] w-[100%] bg-btn flex rounded-[13px] mt-[10px];
 }

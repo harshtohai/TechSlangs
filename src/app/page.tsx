@@ -1,4 +1,5 @@
-import SearchArea from "@/components/searchbar"
+import PostsForHomePage from "@/components/homePosts"
+import InputArea from "@/components/inputarea"
 
 
 export default function Home() {
@@ -9,11 +10,12 @@ export default function Home() {
 
     return(
         <>
-            <main className="flex h-full w-full jusify-between bg-secbg">
-                <div className="w-[50%] flex flex-col justify-between items-center overflow-scroll">
-                    <SearchArea placeholder="Search Slangs..." svg={searchIcon} />
+            <main className="flex h-full w-full justify-center bg-secbg">
+                <div className="w-[47%] flex flex-col items-center">
+                    <InputArea placeholder="Search Slangs..." svg={searchIcon} />
+                    <PostsForHomePage/>
                 </div>
-           </main>
+           </main>  
         </>
         // <h1>something</h1>
         
