@@ -19,7 +19,7 @@ export default function AllButtons({upcount, downcount, commentscount}:{upcount:
   </svg>
 
     return(
-        <div className="h-[5rem] w-full flex justify-between items-end">
+        <div className="w-full flex justify-between items-end mt-[3rem]">
                 <div className="flex ">
                     <Button svg={up} count={upcount}/>
                     <Button svg={down} count={downcount}/>
