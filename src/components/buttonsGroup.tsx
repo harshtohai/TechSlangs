@@ -1,3 +1,5 @@
+'use client'
+
 import Button from "./buttons"
 
 export default function AllButtons({upcount, downcount, commentscount}:{upcount:string, downcount:string, commentscount:string,}) {
@@ -26,9 +28,9 @@ export default function AllButtons({upcount, downcount, commentscount}:{upcount:
                     <Button svg={comment} count={commentscount}/>
                     
                 </div>
-                <div>
+                <button>
                     {share}      
-                </div>
+                </button>
             </div>
     )
 }

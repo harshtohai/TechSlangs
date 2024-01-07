@@ -1,6 +1,6 @@
 import PostsForHomePage from "@/components/homePosts"
 import InputArea from "@/components/inputarea"
-
+import NavButtons from "@/components/navButtons"
 
 export default function Home() {
     const searchIcon = <svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57" fill="none">
@@ -13,11 +13,11 @@ export default function Home() {
             <main className="flex h-full w-full justify-center bg-secbg">
                 <div className="w-[47%] flex flex-col items-center">
                     <InputArea placeholder="Search Slangs..." svg={searchIcon} />
+                    <NavButtons/>
                     <PostsForHomePage/>
                 </div>
            </main>  
         </>
-        // <h1>something</h1>
         
     )
 }   
