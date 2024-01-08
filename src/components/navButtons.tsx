@@ -11,7 +11,7 @@ export default function NavButtons() {
                 </button>
             </Link>
 
-            <Link href={'/profile'}>    
+            <Link href={'/auth'}>    
                 <button className="h-[3rem] w-[19.7rem] my-[0.2rem] mb-[0.8rem] bg-pribg flex items-center justify-center rounded-[4px] hover:border-[1px] border-0 border-text ">
                     <p>Login</p>
                 </button>
