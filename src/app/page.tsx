@@ -12,7 +12,7 @@ export default function Home() {
         <>
             <main className="flex h-full w-full justify-center bg-secbg">
                 <div className="w-[47%] flex flex-col items-center">
-                    <InputArea placeholder="Search Slangs..." svg={searchIcon} />
+                    <InputArea placeholder="Search Slangs..." svg={searchIcon} height="h-[3rem]"/>
                     <NavButtons/>
                     <PostsForHomePage/>
                 </div>
