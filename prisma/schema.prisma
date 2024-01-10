@@ -11,22 +11,20 @@ datasource db {
 }
 
 model Word {
-  id             String  @default(auto()) @map("_id") @db.ObjectId
-  word           String  
-  description    String 
-  user           String
-  up             Int 
-  donw           Int
-  comments       Comment[] 
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  word        String
+  description String
+  user        String
+  upvotes     Int
+  downvotes   Int
+  comments    Comment[]
 }
-
 
 model Comment {
-  id             String  @default(auto()) @map("_id") @db.ObjectId
-  description    String 
-  user           String
-  up             Int 
-  donw           Int
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  comment   String
+  upvotes   Int
+  downvotes Int
+  post      Word   @relation(fields: [wordId], references: [id])
+  wordId    String @db.ObjectId
 }
-
-
