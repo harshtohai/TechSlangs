@@ -1,9 +1,7 @@
-import Button from "./buttons"
+import Link from "next/link"
 import AllButtons from "./buttonsGroup"
 
 export default function Post({word,by,description,upcount,downcount,commentscount}:{word:string, by:string, description:string,upcount:string,downcount:string,commentscount:string}) {
-
-    
 
     return(
         <div className="w-full flex items-center justify-center  bg-pribg rounded-[4px] my-[0.5rem] mb-[1rem] py-[0.5rem] pb-[1rem] px-[2rem]">
@@ -13,9 +11,11 @@ export default function Post({word,by,description,upcount,downcount,commentscoun
                 <div className="flex justify-between flex-col">
 
                     <div className="flex justify-between w-full items-baseline">
-                        <div>
-                            <h1 className="text-[2.5rem] text-text">{word}</h1>
-                        </div>
+                        <Link href={`word/${word}`}>
+                            <div>
+                                <h1 className="text-[2.5rem] text-text hover:underline-1 underline-text">{word}</h1>
+                            </div>
+                        </Link>
                         <div>
                             <p>by <span className="text-text">{by}</span></p>
                         </div>
