@@ -13,11 +13,11 @@ export default function Post({word,by,description,upcount,downcount,commentscoun
                     <div className="flex justify-between w-full items-baseline">
                         <Link href={`word/${word}`}>
                             <div>
-                                <h1 className="text-[2.5rem] text-text hover:underline-1 underline-text">{word}</h1>
+                                <h1 className="text-[2.5rem] text-text">{word}</h1>
                             </div>
                         </Link>
                         <div>
-                            <p>by <span className="text-text">{by}</span></p>
+                            <p>by <Link className="text-text" href={by}>{by}</Link></p>
                         </div>
                     </div>
                     <div>
