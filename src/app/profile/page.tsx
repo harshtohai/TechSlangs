@@ -13,9 +13,9 @@ export default function Profile() {
                 </div>
                 <div className="w-full h-full flex flex-col items-center">
                     <div className="flex w-full items-center justify-center">
-                        <div className="bg-text h-[2px] flex-grow"></div>
+                        <div className="bg-text h-[1px] flex-grow"></div>
                         <h1 className="my-[1rem] w-[7rem]  flex justify-center">Your Posts</h1>
-                        <div className="bg-text h-[2px] flex-grow"></div>
+                        <div className="bg-text h-[1px] flex-grow"></div>
                     </div>
                     <div className="w-full "> 
                         <Post word='Cooked' by="Anon" description="Processed. Said of data that has been manipulated in some manner. Contrast with raw. See baked." upcount="69" downcount="37" commentscount="24" />
