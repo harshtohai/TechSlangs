@@ -1,0 +1,1 @@
+export const env = {GITHUB_CLIENT_ID:'fadjflj;as;dlfj;lasdjf;aj;',GITHUB_CLIENT_SECRET:'fjad;ksfja;dsjfajsdfpaj'}
