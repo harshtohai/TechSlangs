@@ -1,14 +1,15 @@
-import InputArea from "@/components/inputarea"
+"use client"
+
+import { signIn } from "next-auth/react"
 
 
 export default function Login() {
     const svg = <div></div>
     return(
         <main className="flex h-full w-full justify-center bg-secbg">
-            <div className="w-[47%] h-full flex flex-col justify-center items-center">
-                <InputArea svg={svg} placeholder="Email" height="h-[3rem]" />
-                <InputArea svg={svg} placeholder="Password" height="h-[3rem]" />
-                <button className="w-full h-[3rem] bg-pribg hover:border-[1px] border-0 border-text mt-2 flex items-center rounded-[4px] justify-center">Login/Signup</button>
+            <div className="w-[47%] h-full flex justify-evenly items-center bg-pribg hover:border-[1px] border-0 border-text ">
+                <i className="fa fa-github text-[24px]" ></i>
+                <button className="w-full h-[3rem] mt-2 flex items-center rounded-[4px] justify-center" onClick={()=>{signIn('github')}}> Login/Signup</button>
             </div>
         </main>  
     )

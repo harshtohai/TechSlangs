@@ -14,8 +14,9 @@ export default withAuth(
         return NextResponse.redirect(new URL("/", req.url))
       }
 
-      return null
+      return null   
     }
+    
 
     if (!isAuth) {
       let from = req.nextUrl.pathname;
@@ -24,7 +25,7 @@ export default withAuth(
       }
 
       return NextResponse.redirect(
-        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+        new URL(`/auth`, req.url)
       );
     }
   },
@@ -41,5 +42,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/", "/auth"],
+  matcher: ["/profile", "/new-word"],
 }
