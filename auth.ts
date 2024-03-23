@@ -15,10 +15,10 @@ export const {
   pages: {signIn: '/auth'},
   session: {strategy: "jwt"},
   callbacks:{
-    async jwt({ token}) {
+    async jwt({token}) {
       return token;
     },
-    async session({session }) {
+    async session({session}) {
       console.log({session})
       return session
     },

@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Account {
-  id                Int      @id @default(autoincrement())
+  id                Int      @id @default(autoincrement()) @unique
   userId            Int
   type              String
   provider          String
@@ -39,8 +39,8 @@ model User {
   updatedAt     DateTime  @default(now())
   accounts      Account[]
 
-  upvotes String
-  posts   String
+  upvotes Int @default(0)
+  posts   Int @default(0)
   words   Word[]
   Comment Comment[]
 
@@ -50,19 +50,19 @@ model User {
 model Word {
   id            Int       @id @default(autoincrement())
   User          User?     @relation(fields: [userId], references: [id])
-  userId        Int
-  word          String
-  description   String
-  upvotes       String
-  downvotes     String
-  commentscount String
+  userId        Int?
+  word          String?
+  description   String?
+  upvotes       Int?
+  downvotes     Int?
+  commentscount Int?
   comments      Comment[]
 }
 
 model Comment {
   id        Int    @id @default(autoincrement())
-  upvotes   String
-  downvotes String
+  upvotes   Int
+  downvotes Int
 
   Word   Word? @relation(fields: [wordId], references: [id])
   wordId Int
