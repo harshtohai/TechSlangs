@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "accounts" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "providerAccountId" TEXT NOT NULL,
@@ -20,41 +20,43 @@ CREATE TABLE "accounts" (
 
 -- CreateTable
 CREATE TABLE "users" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT,
-    "email" TEXT,
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "image" TEXT,
     "emailVerified" TIMESTAMP(3),
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "upvotes" TEXT NOT NULL,
-    "posts" TEXT NOT NULL,
+    "upvotes" INTEGER NOT NULL DEFAULT 0,
+    "posts" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Word" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "word" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "upvotes" TEXT NOT NULL,
-    "downvotes" TEXT NOT NULL,
-    "commentscount" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "word" TEXT,
+    "description" TEXT,
+    "upvotes" INTEGER,
+    "downvotes" INTEGER,
+    "commentscount" INTEGER,
 
     CONSTRAINT "Word_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Comment" (
-    "id" SERIAL NOT NULL,
-    "upvotes" TEXT NOT NULL,
-    "downvotes" TEXT NOT NULL,
-    "wordId" INTEGER NOT NULL,
-    "userId" INTEGER,
+    "id" TEXT NOT NULL,
+    "upvotes" INTEGER NOT NULL,
+    "downvotes" INTEGER NOT NULL,
+    "wordId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "accounts_id_key" ON "accounts"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts_provider_providerAccountId_key" ON "accounts"("provider", "providerAccountId");
@@ -72,4 +74,4 @@ ALTER TABLE "Word" ADD CONSTRAINT "Word_userId_fkey" FOREIGN KEY ("userId") REFE
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_wordId_fkey" FOREIGN KEY ("wordId") REFERENCES "Word"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comment" ADD CONSTRAINT "Comment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Comment" ADD CONSTRAINT "Comment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
