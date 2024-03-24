@@ -6,6 +6,7 @@ import InputArea from "@/components/inputarea";
 
 const svg = <div></div>
 export default function NewWord(){
+    
     return(
         <main className="flex h-full w-full justify-center bg-secbg">
             <div className="w-[47%] flex flex-col items-center">

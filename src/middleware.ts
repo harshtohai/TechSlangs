@@ -5,6 +5,7 @@ import authConfig from '../auth.config'
 const {auth} = NextAuth(authConfig)
 
 export default auth((req) => {
+  
   const isLoggedIn = !!req.auth;
   const isAuthPage = req.nextUrl.pathname.startsWith("/auth")
   const isProtectedPage = req.nextUrl.pathname.startsWith("/profile") || req.nextUrl.pathname.startsWith("/new-word")
