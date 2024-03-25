@@ -10,17 +10,18 @@ const signOutLogo =
 export default function Signout({params,session}:{params:any, session:any}){
     if(params.id == session?.user?.name){  
         return(
-            <form
-                action={async () => {
-                    "use server"
-                    const data = await signOut({redirect:false, callbackUrl: "/" })
-                    await redirect(data.url)
-                }}
-                >
-                    <button className="w-[3.2rem] bg-pribg ml-[6px] h-[3.2rem] rounded-[4px] flex items-center justify-center" onClick={()=>{signOut()}}>
-                        {signOutLogo}
-                    </button>
-                </form>
+            <button className="w-[3.2rem] bg-pribg ml-[6px] h-[3.2rem] rounded-[4px] flex items-center justify-center" onClick={()=>{console.log('hello')}}>
+                {signOutLogo}
+            </button>
+            // <form>
+            //     {// action={async () => {
+            //     //     // "use server"
+            //     //     console.log('ok')
+            //     //     const data = await signOut({redirect:false, callbackUrl: "/" })
+            //     //     await redirect(data.url)
+            //     // }}}
+                
+            // </form>
         )
     } 
     return 

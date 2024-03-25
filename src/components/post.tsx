@@ -17,7 +17,7 @@ export default function Post({word,by,description,upcount,downcount,commentscoun
                             </div>
                         </Link>
                         <div>
-                            <p>by <Link className="text-text" href={by}>{by}</Link></p>
+                            <p>by <Link className="text-text" href={`profile\\${by}`}>{by}</Link></p>
                         </div>
                     </div>
                     <div>
