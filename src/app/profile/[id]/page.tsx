@@ -1,10 +1,6 @@
-'use client'
-
-
 import Post from "@/components/post";
 import { auth } from "../../../../auth";
-import { signOut } from "next-auth/react";
-// import Signout from "@/components/signOut";
+import { signOut } from "../../../../auth";
 
 export default async function Profile({params}:{params:any}) {
     let session = await auth()
@@ -17,11 +13,14 @@ export default async function Profile({params}:{params:any}) {
 
     function Signout(){
         if(params.id == session?.user?.name){
-  
-            return <button className="w-[3.2rem] bg-pribg ml-[6px] h-[3.2rem] rounded-[4px] flex items-center justify-center" onClick={ ()=>{signOut()}}>{signOutLogo}</button> 
-        } 
-        return 
+            return <form action={async ()=>{ 
+                    "use server"
 
+                    await signOut()}}>
+                        <button type="submit" className="w-[3.2rem] bg-pribg ml-[6px] h-[3.2rem] rounded-[4px] flex items-center justify-center">{signOutLogo}</button>
+                   </form>
+        } 
+        return
     }
     
     return(
