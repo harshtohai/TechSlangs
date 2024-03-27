@@ -37,9 +37,9 @@ CREATE TABLE "Word" (
     "userId" TEXT NOT NULL,
     "word" TEXT,
     "description" TEXT,
-    "upvotes" INTEGER,
-    "downvotes" INTEGER,
-    "commentscount" INTEGER,
+    "upvotes" INTEGER DEFAULT 0,
+    "downvotes" INTEGER DEFAULT 0,
+    "commentscount" INTEGER DEFAULT 0,
 
     CONSTRAINT "Word_pkey" PRIMARY KEY ("id")
 );
@@ -47,16 +47,14 @@ CREATE TABLE "Word" (
 -- CreateTable
 CREATE TABLE "Comment" (
     "id" TEXT NOT NULL,
-    "upvotes" INTEGER NOT NULL,
-    "downvotes" INTEGER NOT NULL,
+    "comment" TEXT NOT NULL,
+    "upvotes" INTEGER NOT NULL DEFAULT 0,
+    "downvotes" INTEGER NOT NULL DEFAULT 0,
     "wordId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "accounts_id_key" ON "accounts"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts_provider_providerAccountId_key" ON "accounts"("provider", "providerAccountId");

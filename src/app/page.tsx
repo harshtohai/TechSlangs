@@ -14,7 +14,7 @@ export default async function Home() {
     return(
         <>
             <main className="flex h-full w-full justify-center bg-secbg">
-                {/* {JSON.stringify(session)} */}
+                {/* {JSON.stringify(session?.user?.id)} */}
                 <div className="w-[47%] flex flex-col items-center">
                     <InputArea placeholder="Search Slangs..." svg={searchIcon} height="h-[3rem]"/>
                     <NavButtons/>

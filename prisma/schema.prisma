@@ -58,7 +58,7 @@ model Word {
 }
 
 model Comment {
-  id        String @id
+  id        String @id @default(cuid())
   comment   String
   upvotes   Int @default(0)
   downvotes Int @default(0)
