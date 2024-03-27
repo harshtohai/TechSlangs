@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Word" ALTER COLUMN "upvotes" SET DEFAULT 0,
+ALTER COLUMN "downvotes" SET DEFAULT 0,
+ALTER COLUMN "commentscount" SET DEFAULT 0;

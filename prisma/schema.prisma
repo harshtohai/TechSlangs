@@ -51,14 +51,15 @@ model Word {
   User          User?     @relation(fields: [userId], references: [id])
   word          String?
   description   String?
-  upvotes       Int?
-  downvotes     Int?
-  commentscount Int?
+  upvotes       Int?      @default(0)
+  downvotes     Int?      @default(0)
+  commentscount Int?      @default(0)
   comments      Comment[]
 }
 
 model Comment {
   id        String @id
+  comment   String
   upvotes   Int @default(0)
   downvotes Int @default(0)
 
