@@ -2,7 +2,7 @@
 
 import Button from "./buttons"
 
-export default function AllButtons({upcount, downcount, commentscount}:{upcount:string, downcount:string, commentscount:string,}) {
+export default function AllButtons({upcount, downcount, commentscount}:{upcount:number|null, downcount:number|null, commentscount:number|null,}) {
     
     const down = <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
     <path d="M36.4767 9.22668C36.3352 8.95742 36.1229 8.7319 35.8627 8.57447C35.6025 8.41704 35.3042 8.33366 35 8.33334H5.00002C4.69642 8.3346 4.39891 8.41859 4.13948 8.57628C3.88006 8.73398 3.66852 8.95941 3.52763 9.22833C3.38674 9.49726 3.32183 9.7995 3.33987 10.1026C3.35791 10.4056 3.45822 10.698 3.63002 10.9483L18.63 32.615C18.7829 32.8371 18.9875 33.0187 19.2262 33.1441C19.4648 33.2695 19.7304 33.3351 20 33.3351C20.2696 33.3351 20.5352 33.2695 20.7739 33.1441C21.0125 33.0187 21.2171 32.8371 21.37 32.615L36.37 10.9483C36.5435 10.6985 36.6452 10.406 36.664 10.1024C36.6828 9.79887 36.618 9.49598 36.4767 9.22668ZM20 28.7383L8.18002 11.6667H31.82L20 28.7383Z" fill="#DA0037" stroke="#111111" strokeWidth="0.3"/>

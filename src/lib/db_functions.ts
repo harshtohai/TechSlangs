@@ -1,5 +1,6 @@
 "use server"
 
+import { createInterface } from "readline";
 import { auth } from "../../auth";
 import { db } from "./db";
 
@@ -11,13 +12,10 @@ import { db } from "./db";
 export  async function addWord(word:string, desc:string){
   const session = await auth()
   const sessionMail = session?.user?.email?.toString()
-  console.log(sessionMail)
-  console.log(word)
-  console.log(desc)
   const uploaded = await db.user.update({
     where: { email: sessionMail },
     data:{
-      upvotes:{increment:1},      
+      posts:{increment:1},
       words:{       
         create:{
           word:word,
@@ -27,8 +25,6 @@ export  async function addWord(word:string, desc:string){
     },
     include:{words:true} 
   });
-  console.log(!!uploaded)
-  console.log(uploaded)
   return !!uploaded
 }
 
@@ -87,15 +83,13 @@ export async function addComment({id,commnt}:{id:string,commnt:string}){
   return !!commented
 }
 
-export async function findUser(){
-  const session = await auth()
-  const sessionMail = session?.user?.email?.toString()
-  const User = await db.user.findUnique({
-    where:{email:sessionMail},
-    include:{words:true,Comment:true,}  
+export async function findUser(userName:string){
+  let user = await db.user.findFirst({
+    where:{name:userName},
+    include:{words:true, Comment:true}  
   })
-  console.log(User)
-  return User
+  // console.log(user)
+  return {user}
 }
 
 export async function showcasePosts(){
