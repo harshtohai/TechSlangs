@@ -1,25 +1,35 @@
+"use server"
+
 import { auth } from "../../auth";
 import { db } from "./db";
 
-// const session = async ()=>{ return await auth()}
-export  async function addWord(sessionMail:any,word:string, desc:string){
-  // const uploaded = await db.user.update({
-  //   where: { email: sessionMail },
-  //   data: {
-  //     words: {
-  //       create: { word:word, description:desc },
-  //     },
-  //    posts:{increment:1} 
-  //   },
-  //   include:{words:true}
-  // });
 
-  // return !!uploaded
-  'use server'
-
-
+// async ()=>{const session = await auth()}  
+// export const checker = async ()=>{
+//   console.log(session)
+// }
+export  async function addWord(word:string, desc:string){
   const session = await auth()
-  console.log(session)
+  const sessionMail = session?.user?.email?.toString()
+  console.log(sessionMail)
+  console.log(word)
+  console.log(desc)
+  const uploaded = await db.user.update({
+    where: { email: sessionMail },
+    data:{
+      upvotes:{increment:1},      
+      words:{       
+        create:{
+          word:word,
+          description:desc
+        },
+      },
+    },
+    include:{words:true} 
+  });
+  console.log(!!uploaded)
+  console.log(uploaded)
+  return !!uploaded
 }
 
 export async function downVoteWord({id}:{id:string}){
@@ -77,12 +87,14 @@ export async function addComment({id,commnt}:{id:string,commnt:string}){
   return !!commented
 }
 
-export async function findUser(sessionMail:string){
+export async function findUser(){
+  const session = await auth()
+  const sessionMail = session?.user?.email?.toString()
   const User = await db.user.findUnique({
     where:{email:sessionMail},
     include:{words:true,Comment:true,}  
   })
-
+  console.log(User)
   return User
 }
 
