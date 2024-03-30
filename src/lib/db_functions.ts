@@ -1,14 +1,9 @@
 "use server"
 
-import { createInterface } from "readline";
 import { auth } from "../../auth";
 import { db } from "./db";
 
 
-// async ()=>{const session = await auth()}  
-// export const checker = async ()=>{
-//   console.log(session)
-// }
 export  async function addWord(word:string, desc:string){
   const session = await auth()
   const sessionMail = session?.user?.email?.toString()
@@ -28,7 +23,7 @@ export  async function addWord(word:string, desc:string){
   return !!uploaded
 }
 
-export async function downVoteWord({id}:{id:string}){
+export async function downVoteWord(id:string){
   const voted = await db.word.update({
     where:{id:id}, 
     data:{ 
@@ -39,7 +34,7 @@ export async function downVoteWord({id}:{id:string}){
   return !!voted
 }
 
-export async function upVoteWord({id,}:{id:string,}){
+export async function upVoteWord(id:string){
   
   const voted = await db.word.update({
     where:{id:id}, 
@@ -48,12 +43,12 @@ export async function upVoteWord({id,}:{id:string,}){
       User:{update:{upvotes:{increment:1}}}
     } 
   })
-
+  console.log(voted)
   return !!voted
 }
 
 //VOTE COMMENT
-export async function downVoteComment({id}:{id:string}){
+export async function downVoteComment(id:string){
   const voted = await db.comment.update({
     where:{id:id},
     data:{downvotes:{increment:1}}
@@ -62,7 +57,7 @@ export async function downVoteComment({id}:{id:string}){
   return !!voted
 }
 
-export async function upVoteComment({id}:{id:string}){
+export async function upVoteComment(id:string){
   const voted = await db.comment.update({
     where:{id:id},
     data:{
@@ -104,4 +99,20 @@ export async function findWord(wordId:string){
   })
 
   return post
+}
+
+export async function deleteWord(wordId:string){
+  const deleted = await db.word.delete({
+    where:{id:wordId},
+  })
+  let upVotesToRemove:any = deleted.upvotes
+  const userUpdate = await db.user.update({
+    where:{id:deleted.userId},
+    data:{
+      posts:{decrement:1},
+      upvotes:{decrement:upVotesToRemove}
+    }
+  })
+  console.log(deleted)
+  return !!deleted
 }

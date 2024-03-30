@@ -12,9 +12,6 @@ export default function NewWord(){
                 let newWord = (document.getElementById('newWord') as HTMLInputElement).value
                 let description = (document.getElementById('descpriptionBox') as HTMLInputElement).value
                 addWord(newWord,description)
-                // findUser()
-                // console.log( newWord + description)
-                // checker()
                 }}>
                 <InputArea svg={svg} placeholder="Enter New Word" height="h-[3rem]" />
                 <textarea name="description" placeholder="Description about word.   " id="descpriptionBox" className="h-[15rem] w-full bg-pribg placeholder-text rounded-[4px] text-text outline-none resize-none p-[1rem] px-[2rem]"></textarea>

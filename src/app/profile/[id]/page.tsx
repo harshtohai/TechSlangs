@@ -36,9 +36,9 @@ export default async function Profile({params}:{params:any}) {
 
 
     function Posts(){
-        if (user?.posts != undefined && 0 ){
+        if (user?.posts != 0){
             console.log('true')
-            user?.words.map((word)=>{
+            return user?.words.map((word)=>{
                 return <Post word={word.word} by={user.name} description={word.description} upcount={word.upvotes} downcount={word.downvotes} key={word.id} commentscount={word.commentscount} id={word.id} />
             })
         }
@@ -50,6 +50,7 @@ export default async function Profile({params}:{params:any}) {
                 return <div className="mt-[2rem] w-full flex justify-center items-center"> <h1 className="text-text text-xl">{userName} have'nt made any contributions yet.. :sad: </h1></div>
             }
         }
+        return
     }
     
     return(
@@ -73,7 +74,7 @@ export default async function Profile({params}:{params:any}) {
                     </div>
                     <div className="w-full "> 
 
-                        <Posts />
+                       <Posts/>
                            
                     </div>
                 </div>
