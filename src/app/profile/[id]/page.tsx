@@ -14,7 +14,7 @@ export default async function Profile({params}:{params:any}) {
 
     let session = await auth()
     const user = (await findUser(params.id)).user
-    console.log(user)
+    // console.log(user)
     if (!!user != true){
         return <div className="h-full w-full flex items-center justify-center"><h1 className="text-text text-xl">Oops.. Can't find this user.</h1></div>
     }
@@ -33,7 +33,6 @@ export default async function Profile({params}:{params:any}) {
         } 
         return
     }
-
 
     async function  Posts(){
         if (user?.posts != 0){

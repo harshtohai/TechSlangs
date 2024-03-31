@@ -34,51 +34,19 @@ export async function downVoteWord(id:string){
 
   const session = await auth()
 
-  const userVoted = await db.user.update({
-    where:{id:session?.user?.id},
-    data:{
-      downvoted:{
-        create:{
-          wordId:voted.id
-        }
-      }
+  const userVoted = await db.voted.upsert({
+    where:{wordId:id},
+    create:{
+      wordId:id,
+      userId:session?.user?.id,
+      vote:false
+    },
+    update:{
+      vote:false
     }
   })
-
+  console.log('word Down voted')
   return !!voted
-}
-
-export async function decreUpVotedWord(id:string){
-  const dVoted = await db.word.update({
-    where:{id:id}, 
-    data:{
-      upvotes:{decrement:1},
-      User:{update:{upvotes:{decrement:1}}}
-    } 
-  })
-  
-  const session = await auth()
-  const dUpVoted = await db.upVoted.deleteMany({
-    where:{userId:session?.user?.id,wordId:id}
-  })
-
-  console.log('dVoted')
-}
-export async function decreDownVotedWord(id:string){
-  const dVoted = await db.word.update({
-    where:{id:id}, 
-    data:{
-      downvotes:{decrement:1},
-    } 
-  })
-  
-  const session = await auth()
-  const dDownVoted = await db.downVoted.deleteMany({
-    where:{userId:session?.user?.id,wordId:id}
-  })
-
-  console.log(dVoted)
-  return !!dVoted
 }
 
 export async function upVoteWord(id:string){
@@ -93,19 +61,57 @@ export async function upVoteWord(id:string){
   
   const session = await auth()
 
-  const userVoted = await db.user.update({
-    where:{id:session?.user?.id},
-    data:{
-      upvoted:{
-        create:{
-          wordId:voted.id
-        }
-      }
+  const userVoted = await db.voted.upsert({
+    where:{wordId:id},
+    create:{
+      wordId:id,
+      userId:session?.user?.id,
+      vote:true
+    },
+    update:{
+      vote:true
     }
   })
 
-  console.log(voted)
+  console.log('word UP voted')
   return !!voted
+}
+
+export async function deUpVoteWord(id:string){
+  const dVoted = await db.word.update({
+    where:{id:id}, 
+    data:{
+      upvotes:{decrement:1},
+      User:{update:{upvotes:{decrement:1}}}
+    } 
+  })
+  
+  const dUpVoted = await db.voted.update({
+    where:{wordId:id},
+    data:{
+      vote:null
+    }
+  })
+
+  console.log('Word DeVoted From UP')
+}
+
+export async function deDownVoteWord(id:string){
+  const dVoted = await db.word.update({
+    where:{id:id}, 
+    data:{
+      downvotes:{decrement:1},
+    } 
+  })
+  
+  const dUpVoted = await db.voted.update({
+    where:{wordId:id},
+    data:{
+      vote:null
+    }
+  })
+
+  console.log('Word DeVoted from Down')
 }
 
 export async function downVoteComment(id:string){
@@ -179,21 +185,24 @@ export async function deleteWord(wordId:string){
 
 export async function wordVoted(id:string,sessionId:string|undefined){
   if (sessionId){
-    
 
-    let upvoted = await db.upVoted.findMany({
+    let upvoted = await db.voted.findUnique({
       where:{wordId:id, userId:sessionId},
     })
-    console.log(upvoted)
-    if (upvoted.length > 0) return 'upvoted'
+    
+    console.log(wordVoted)
+    return upvoted?.vote
 
-    let downvoted = await db.downVoted.findMany({
-      where:{wordId:id,userId:sessionId}
-    })
-    console.log(downvoted)
-    if (downvoted.length > 0) return 'downvoted'
-    
-    return 'notvoted'
-    
+
   }
+}
+
+export async function fromDownToUp(id:string){
+  deDownVoteWord(id)
+  upVoteWord(id)
+}
+
+export async function fromUpToDown(id:string){
+  deUpVoteWord(id)
+  downVoteWord(id)
 }

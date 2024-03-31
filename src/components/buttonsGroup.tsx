@@ -1,7 +1,6 @@
 'use client'
 
 import Button from "./buttons"
-import { upVoteWord,downVoteWord,deleteWord,wordVoted, decreUpVotedWord, decreDownVotedWord } from "@/lib/db_functions"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -12,7 +11,7 @@ interface Buttons {
   id:string,
   userId:string|undefined,
   sessionUserId:string|undefined,
-  vote:any
+  vote:boolean|undefined|null
 }
 
   const up = <svg width="25" height="25" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,29 +47,44 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
   const [upCount,updateUpcount] = useState(upcount)
   const [downCount,updateDownCount] = useState(downcount)
   
-  return(
-    <div className="w-full flex justify-between items-end mt-[3rem]">
+  return( 
+    <div className="w-full flex justify-between items-end mt-[3rem]"> 
       <div className="flex ">
           <Button 
-            svg={votestate == "upvoted" ? upFilled : up}
+            svg={votestate ? upFilled : up}
             count={upCount} 
             id={id}
-            changeCount={votestate == "upvoted" ? -1 : 1} 
+            buttonType = 'UpVote'
+            voteState = {votestate}
+            changeCount={votestate ? -1 : 1} 
             countUpdate={updateUpcount}   
+            alterCountUpdate={updateDownCount} 
             stateUpdate={updateVote} 
-            state={votestate == "upvoted"? "notvoted" : "upvoted"} 
-            onClickFunction={votestate == "upvoted" ? decreUpVotedWord : upVoteWord} 
+            state={votestate ? undefined : true} 
+            
           />
-          <Button svg={votestate == "downvoted" ? downFilled : down} count={downCount} id={id} changeCount={votestate == "downvoted"? 1 : -1} countUpdate={updateDownCount} stateUpdate={updateVote} state={votestate == "downvoted"? "notvoted" : "downvoted"} onClickFunction={votestate == "downvoted" ? decreDownVotedWord : downVoteWord} />
+          <Button 
+            svg={votestate == false ? downFilled : down} 
+            count={downCount} 
+            id={id} 
+            buttonType = 'DownVote'
+            voteState = {votestate}
+            changeCount={votestate == false ? -1 : 1} 
+            countUpdate={updateDownCount} 
+            alterCountUpdate = {updateUpcount}
+            stateUpdate={updateVote} 
+            state={votestate == false ? null : false} 
+          />
+
           <Link href={`/word/${id}`}>
             <Button svg={comment} count={commentscount} id={id}/> 
           </Link>
       </div>
       <div className="flex flex-right">
         {
-          sessionUserId == userId ? <Button  svg={deleteIcon} count={null} id={id} onClickFunction={deleteWord}  /> : <div className={"flex items-center mr-[15px]"}></div>
+          sessionUserId == userId ? <Button  svg={deleteIcon} count={null} id={id} buttonType="Delete"  /> : <div className={"flex items-center mr-[15px]"}></div>
         }
-        <Button svg={share} count={null} id={id} className="mr-[0px!important]"/>
+        <Button svg={share} count={null} id={id} buttonType="Share" className="mr-[0px!important]"/>
       </div>
 
     </div>

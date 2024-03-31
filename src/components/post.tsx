@@ -14,8 +14,7 @@ interface Post {
     sessionUserId:string|undefined
 }
 export default async function Post({word,by,description,upcount,downcount,commentscount,id,userId,sessionUserId}:Post) {
-    const vote:any = await wordVoted(id,sessionUserId)
-    console.log(vote)
+    const vote:boolean|undefined|null = await wordVoted(id,sessionUserId)
     return(
             <div className="w-full flex items-center justify-center  bg-pribg rounded-[4px] my-[0.5rem] mb-[1rem] py-[0.5rem] pb-[1rem] px-[2rem]" id={id}>
                 <div className=" w-full justify-between flex flex-col" >
