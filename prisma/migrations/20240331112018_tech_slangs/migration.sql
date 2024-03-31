@@ -22,6 +22,7 @@ CREATE TABLE "accounts" (
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "username" TEXT,
     "email" TEXT NOT NULL,
     "image" TEXT,
     "emailVerified" TIMESTAMP(3),
@@ -29,6 +30,15 @@ CREATE TABLE "users" (
     "posts" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Voted" (
+    "wordId" TEXT NOT NULL,
+    "vote" BOOLEAN,
+    "userId" TEXT,
+
+    CONSTRAINT "Voted_pkey" PRIMARY KEY ("wordId")
 );
 
 -- CreateTable
@@ -60,10 +70,19 @@ CREATE TABLE "Comment" (
 CREATE UNIQUE INDEX "accounts_provider_providerAccountId_key" ON "accounts"("provider", "providerAccountId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
 ALTER TABLE "accounts" ADD CONSTRAINT "accounts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Voted" ADD CONSTRAINT "Voted_wordId_fkey" FOREIGN KEY ("wordId") REFERENCES "Word"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Voted" ADD CONSTRAINT "Voted_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Word" ADD CONSTRAINT "Word_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

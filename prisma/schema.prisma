@@ -31,34 +31,27 @@ model Account {
 }
 
 model User {
-  id            String      @id
+  id            String    @id
   name          String
-  username      String?     @unique
-  email         String      @unique
+  username      String?   @unique
+  email         String    @unique
   image         String?
   emailVerified DateTime?
   accounts      Account[]
-  upvotes       Int         @default(0)
-  posts         Int         @default(0)
+  upvotes       Int       @default(0)
+  posts         Int       @default(0)
   words         Word[]
   Comment       Comment[]
-  upvoted       UpVoted[]
-  downvoted     DownVoted[]
+  voted         Voted[]
 
   @@map(name: "users")
 }
 
-model UpVoted {
-  id     String  @id @default(cuid())
-  wordId String?
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
-}
-
-model DownVoted {
-  id     String  @id @default(cuid())
-  wordId String?
-  User   User?   @relation(fields: [userId], references: [id])
+model Voted {
+  wordId String   @id
+  word   Word     @relation(fields: [wordId], references: [id])
+  vote   Boolean?
+  User   User?    @relation(fields: [userId], references: [id])
   userId String?
 }
 
@@ -72,6 +65,7 @@ model Word {
   downvotes     Int?      @default(0)
   commentscount Int?      @default(0)
   comments      Comment[]
+  Voted         Voted[]
 }
 
 model Comment {

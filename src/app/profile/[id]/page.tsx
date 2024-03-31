@@ -35,11 +35,11 @@ export default async function Profile({params}:{params:any}) {
     }
 
 
-    function Posts(){
+    async function  Posts(){
         if (user?.posts != 0){
             console.log('true')
             return user?.words.map((word)=>{
-                return <Post word={word.word} by={user.name} description={word.description} upcount={word.upvotes} downcount={word.downvotes} key={word.id} commentscount={word.commentscount} id={word.id} />
+                return <Post word={word.word} by={user.name} description={word.description} upcount={word.upvotes} downcount={word.downvotes} key={word.id} commentscount={word.commentscount} sessionUserId={session?.user?.id} userId={word.userId}  id={word.id} />
             })
         }
         else{

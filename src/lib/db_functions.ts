@@ -24,6 +24,7 @@ export  async function addWord(word:string, desc:string){
 }
 
 export async function downVoteWord(id:string){
+
   const voted = await db.word.update({
     where:{id:id}, 
     data:{ 
@@ -31,7 +32,53 @@ export async function downVoteWord(id:string){
     } 
   })
 
+  const session = await auth()
+
+  const userVoted = await db.user.update({
+    where:{id:session?.user?.id},
+    data:{
+      downvoted:{
+        create:{
+          wordId:voted.id
+        }
+      }
+    }
+  })
+
   return !!voted
+}
+
+export async function decreUpVotedWord(id:string){
+  const dVoted = await db.word.update({
+    where:{id:id}, 
+    data:{
+      upvotes:{decrement:1},
+      User:{update:{upvotes:{decrement:1}}}
+    } 
+  })
+  
+  const session = await auth()
+  const dUpVoted = await db.upVoted.deleteMany({
+    where:{userId:session?.user?.id,wordId:id}
+  })
+
+  console.log('dVoted')
+}
+export async function decreDownVotedWord(id:string){
+  const dVoted = await db.word.update({
+    where:{id:id}, 
+    data:{
+      downvotes:{decrement:1},
+    } 
+  })
+  
+  const session = await auth()
+  const dDownVoted = await db.downVoted.deleteMany({
+    where:{userId:session?.user?.id,wordId:id}
+  })
+
+  console.log(dVoted)
+  return !!dVoted
 }
 
 export async function upVoteWord(id:string){
@@ -43,11 +90,24 @@ export async function upVoteWord(id:string){
       User:{update:{upvotes:{increment:1}}}
     } 
   })
+  
+  const session = await auth()
+
+  const userVoted = await db.user.update({
+    where:{id:session?.user?.id},
+    data:{
+      upvoted:{
+        create:{
+          wordId:voted.id
+        }
+      }
+    }
+  })
+
   console.log(voted)
   return !!voted
 }
 
-//VOTE COMMENT
 export async function downVoteComment(id:string){
   const voted = await db.comment.update({
     where:{id:id},
@@ -115,4 +175,25 @@ export async function deleteWord(wordId:string){
   })
   console.log(deleted)
   return !!deleted
+}
+
+export async function wordVoted(id:string,sessionId:string|undefined){
+  if (sessionId){
+    
+
+    let upvoted = await db.upVoted.findMany({
+      where:{wordId:id, userId:sessionId},
+    })
+    console.log(upvoted)
+    if (upvoted.length > 0) return 'upvoted'
+
+    let downvoted = await db.downVoted.findMany({
+      where:{wordId:id,userId:sessionId}
+    })
+    console.log(downvoted)
+    if (downvoted.length > 0) return 'downvoted'
+    
+    return 'notvoted'
+    
+  }
 }
