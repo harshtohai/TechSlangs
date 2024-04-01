@@ -23,7 +23,7 @@ export default async function Profile({params}:{params:any}) {
     const user = (await findUser(params.id)).user
     // console.log(user)
     if (!!user != true){
-        return <div className="h-full w-full flex items-center justify-center"><h1 className="text-text text-xl">Oops.. Can't find this user.</h1></div>
+        return <div className="h-full w-full flex items-center justify-center"><h1 className="text-text text-xl">Oops.. Cant find this user.</h1></div>
     }
     const userName = user?.name
     const upVotes = user?.upvotes
@@ -52,10 +52,10 @@ export default async function Profile({params}:{params:any}) {
         }
         else{
             if(params.id == session?.user?.name){
-                return <div className="mt-[2rem] w-full flex justify-center items-center"> <h1 className="text-text text-xl">You have'nt made any contributions yet.. :sad: </h1></div>
+                return <div className="mt-[2rem] w-full flex justify-center items-center"> <h1 className="text-text text-xl">You havent made any contributions yet.. :sad: </h1></div>
             }
             else{
-                return <div className="mt-[2rem] w-full flex justify-center items-center"> <h1 className="text-text text-xl">{userName} have'nt made any contributions yet.. :sad: </h1></div>
+                return <div className="mt-[2rem] w-full flex justify-center items-center"> <h1 className="text-text text-xl">{userName} have    nt made any contributions yet.. :sad: </h1></div>
             }
         }
         return
