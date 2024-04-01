@@ -1,3 +1,5 @@
+'use client'
+
 import PostsForHomePage from "@/components/homePosts"
 import NavButtons from "@/components/navButtons"
 import { redirect } from "next/navigation"
