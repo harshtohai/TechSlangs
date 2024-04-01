@@ -61,6 +61,7 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
             countUpdate={updateUpcount}   
             alterCountUpdate={updateDownCount} 
             stateUpdate={updateVote} 
+            sessionid={sessionUserId}
             state={votestate ? undefined : true} 
             
           />
@@ -74,6 +75,7 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
             countUpdate={updateDownCount} 
             alterCountUpdate = {updateUpcount}
             stateUpdate={updateVote} 
+            sessionid={sessionUserId}
             state={votestate == false ? null : false} 
           />
 

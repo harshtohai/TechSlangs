@@ -4,12 +4,13 @@ import { ReactNode } from "react";
 import { upVoteWord,downVoteWord,deleteWord,deDownVoteWord,deUpVoteWord, fromDownToUp, fromUpToDown} from "@/lib/db_functions"
 
 
-interface Button {svg:ReactNode,id:string, count:number|null,className?:string,state?:boolean|undefined|null,voteState?:boolean|undefined|null,stateUpdate?:any,countUpdate?:any,buttonType?:string, changeCount?:number, alterCountUpdate?:any}
+interface Button {svg:ReactNode,id:string, count:number|null,className?:string,state?:boolean|undefined|null,voteState?:boolean|undefined|null,stateUpdate?:any,countUpdate?:any,buttonType?:string, changeCount?:number, alterCountUpdate?:any,sessionid?:string|undefined}
 
-export default function Button({className="",svg,id ,count,state,stateUpdate,countUpdate,changeCount,buttonType,voteState,alterCountUpdate}:Button){
+export default function Button({className="",svg,id ,count,state,stateUpdate,countUpdate,changeCount,buttonType,voteState,alterCountUpdate,sessionid}:Button){
     return(
             <button onClick={async ()=>{
                 if (buttonType == 'UpVote'){
+                    if (sessionid == undefined ) return
                     switch (voteState) {
                         case true:
                             deUpVoteWord(id)
@@ -24,6 +25,7 @@ export default function Button({className="",svg,id ,count,state,stateUpdate,cou
                 }
 
                 if(buttonType == 'DownVote'){
+                    if (sessionid == undefined ) return
                     switch(voteState){
                         case true:
                             fromUpToDown(id)
