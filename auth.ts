@@ -14,7 +14,6 @@ export const {
   session: {strategy: "jwt"}, 
   callbacks:{
     async jwt({token}) {
-      // console.log(token)
       token.userId = token.sub
       return token;
     },
