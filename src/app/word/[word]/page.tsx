@@ -2,6 +2,7 @@ import { findWord } from "@/lib/db_functions"
 import { auth } from "../../../../auth"
 import Post from "@/components/post"
 import Link from "next/link";
+import NavButtons from "@/components/navButtons";
 
 
 export default async function WordSearch({word}:{word:string}){
