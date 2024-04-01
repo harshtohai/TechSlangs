@@ -161,12 +161,12 @@ export async function showcasePosts(){
 }
 
 export async function findWord(wordId:string){
-  const post = db.word.findUnique({
-    where:{id:wordId},
-    include:{comments:true}
+  const Posts = await db.word.findMany({
+    where:{word:wordId},
+    include:{User:true}
   })
 
-  return post
+  return {Posts}
 }
 
 export async function deleteWord(wordId:string){
