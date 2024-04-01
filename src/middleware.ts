@@ -2,9 +2,9 @@ import NextAuth from "next-auth"
 import { NextResponse } from "next/server";
 import authConfig from '../auth.config'
 
-const {auth} = NextAuth(authConfig)
+const {auth}:any = NextAuth(authConfig)
 
-export default auth((req) => {
+export default auth((req:any) => {
   
   const isLoggedIn = !!req.auth;
   const isAuthPage = req.nextUrl.pathname.startsWith("/auth")
