@@ -41,15 +41,19 @@ export default function Button({className="",svg,id ,count,state,stateUpdate,cou
                 }
 
                 if (buttonType == 'Delete') {
+                    if (sessionid == undefined) return
                     deleteWord(id);
                     (document.getElementById(id) as HTMLBodyElement).style.display = 'none';
                 }
 
-                if (stateUpdate) stateUpdate(state)
+                if (sessionid != undefined){
 
-                if (count != null && changeCount != undefined){
-                    countUpdate(count + changeCount)
-                }
+                    if (stateUpdate) stateUpdate(state)
+                    
+                    if (count != null && changeCount != undefined){
+                        countUpdate(count + changeCount)
+                    }
+                } 
 
                 }} className={`${className}` + " flex items-center mr-[15px] " }>
                 {svg}
