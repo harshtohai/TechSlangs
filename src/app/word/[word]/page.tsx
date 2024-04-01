@@ -15,7 +15,7 @@ export default async function WordSearch({params}:{params:any}){
             })
         }
         else{
-            return <div className="w-full h-full justify-center items-center"><h1 className="text-text">No matching word was found. You can add <Link href='/new-word'>{params.word}</Link></h1></div>
+            return <div className="w-full h-full flex justify-center items-center"><h1 className="text-text">No matching word was found. You can add <Link href='/new-word'>{params.word}</Link></h1></div>
         }
     }
     
