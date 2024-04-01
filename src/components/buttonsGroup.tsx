@@ -46,12 +46,12 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
   const [votestate,updateVote] = useState(vote)
   const [upCount,updateUpcount] = useState(upcount)
   const [downCount,updateDownCount] = useState(downcount)
-  
-  return( 
-    <div className="w-full flex justify-between items-end mt-[3rem]"> 
-      <div className="flex ">
 
-          <Button 
+  function VoteButton(){
+    if (sessionUserId != undefined) {
+      return( 
+      <>
+        <Button 
             svg={votestate ? upFilled : up}
             count={upCount} 
             id={id}
@@ -61,7 +61,6 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
             countUpdate={updateUpcount}   
             alterCountUpdate={updateDownCount} 
             stateUpdate={updateVote} 
-            sessionid={sessionUserId}
             state={votestate ? undefined : true} 
             
           />
@@ -75,10 +74,17 @@ export default function AllButtons({upcount, downcount, commentscount, id, userI
             countUpdate={updateDownCount} 
             alterCountUpdate = {updateUpcount}
             stateUpdate={updateVote} 
-            sessionid={sessionUserId}
             state={votestate == false ? null : false} 
-          />
-
+            />
+      </>
+      )
+    }
+  }
+  
+  return( 
+    <div className="w-full flex justify-between items-end mt-[3rem]"> 
+      <div className="flex ">
+        <VoteButton/>
       </div>
       <div className="flex flex-right">
         {

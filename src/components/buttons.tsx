@@ -4,13 +4,13 @@ import { ReactNode } from "react";
 import { upVoteWord,downVoteWord,deleteWord,deDownVoteWord,deUpVoteWord, fromDownToUp, fromUpToDown} from "@/lib/db_functions"
 
 
-interface Button {svg:ReactNode,id:string, count:number|null,className?:string,state?:boolean|undefined|null,voteState?:boolean|undefined|null,stateUpdate?:any,countUpdate?:any,buttonType?:string, changeCount?:number, alterCountUpdate?:any,sessionid?:string|undefined}
+interface Button {svg:ReactNode,id:string, count:number|null,className?:string,state?:boolean|undefined|null,voteState?:boolean|undefined|null,stateUpdate?:any,countUpdate?:any,buttonType?:string, changeCount?:number, alterCountUpdate?:any,}
 
-export default function Button({className="",svg,id ,count,state,stateUpdate,countUpdate,changeCount,buttonType,voteState,alterCountUpdate,sessionid}:Button){
+export default function Button({className="",svg,id ,count,state,stateUpdate,countUpdate,changeCount,buttonType,voteState,alterCountUpdate,}:Button){
     return(
             <button onClick={async ()=>{
                 if (buttonType == 'UpVote'){
-                    if (sessionid == undefined ) return
+                    // if (sessionid == undefined ) return
                     switch (voteState) {
                         case true:
                             deUpVoteWord(id)
@@ -25,7 +25,6 @@ export default function Button({className="",svg,id ,count,state,stateUpdate,cou
                 }
 
                 if(buttonType == 'DownVote'){
-                    if (sessionid == undefined ) return
                     switch(voteState){
                         case true:
                             fromUpToDown(id)
@@ -41,19 +40,16 @@ export default function Button({className="",svg,id ,count,state,stateUpdate,cou
                 }
 
                 if (buttonType == 'Delete') {
-                    if (sessionid == undefined) return
                     deleteWord(id);
                     (document.getElementById(id) as HTMLBodyElement).style.display = 'none';
                 }
 
-                if (sessionid != undefined){
 
                     if (stateUpdate) stateUpdate(state)
                     
                     if (count != null && changeCount != undefined){
                         countUpdate(count + changeCount)
                     }
-                } 
 
                 }} className={`${className}` + " flex items-center mr-[15px] " }>
                 {svg}
