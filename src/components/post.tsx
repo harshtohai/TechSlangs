@@ -20,11 +20,9 @@ export default async function Post({word,by,description,upcount,downcount,commen
                 <div className=" w-full justify-between flex flex-col" >
                     <div className="flex justify-between flex-col">
                         <div className="flex justify-between w-full items-baseline">
-                            <Link href={`/word/${word}`}>
                                 <div>
                                     <h1 className="text-[2.5rem] text-text">{word}</h1>
                                 </div>
-                            </Link>
                             <div>
                                 <p>by <Link className="text-text" href={`/profile/${by}`}>{by}</Link></p>
                             </div>

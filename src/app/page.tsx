@@ -1,8 +1,7 @@
 import PostsForHomePage from "@/components/homePosts"
 import InputArea from "@/components/inputarea"
 import NavButtons from "@/components/navButtons"
-import {auth} from  "@/../auth"
-import { json } from "stream/consumers"
+
 
 export default async function Home() {
     const searchIcon = <svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57" fill="none">
@@ -10,14 +9,12 @@ export default async function Home() {
   </svg>
 
 
-    let session = await auth()
     return(
         <>
             <main className="flex h-full w-full justify-center bg-secbg">
-                {/* {JSON.stringify(session?.user?.id)} */}
-                <div className="w-[47%] flex flex-col items-center">
+                <div className="w-[47%] flex h-full flex-col items-center">
                     <InputArea placeholder="Search Slangs..." svg={searchIcon} height="h-[3rem]"/>
-                    <NavButtons/>
+                    <NavButtons leftButton = 'Add New Word' leftButtonUrl = {'/new-word'} />
                     <PostsForHomePage/>
                 </div>
             </main>  

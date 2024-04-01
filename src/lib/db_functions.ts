@@ -154,8 +154,10 @@ export async function findUser(userName:string){
 }
 
 export async function showcasePosts(){
-  const Posts = await db.word.findMany()
-  return Posts
+  const Posts = await db.word.findMany({
+    include:{User:true}
+  })
+  return {Posts}
 }
 
 export async function findWord(wordId:string){

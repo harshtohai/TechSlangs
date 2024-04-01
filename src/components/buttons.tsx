@@ -8,8 +8,7 @@ interface Button {svg:ReactNode,id:string, count:number|null,className?:string,s
 
 export default function Button({className="",svg,id ,count,state,stateUpdate,countUpdate,changeCount,buttonType,voteState,alterCountUpdate}:Button){
     return(
-            <button onClick={()=>{
-                // onClickFunction(id)
+            <button onClick={async ()=>{
                 if (buttonType == 'UpVote'){
                     switch (voteState) {
                         case true:
@@ -40,7 +39,8 @@ export default function Button({className="",svg,id ,count,state,stateUpdate,cou
                 }
 
                 if (buttonType == 'Delete') {
-                    deleteWord(id)
+                    deleteWord(id);
+                    (document.getElementById(id) as HTMLBodyElement).style.display = 'none';
                 }
 
                 if (stateUpdate) stateUpdate(state)
